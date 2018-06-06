@@ -1,0 +1,14 @@
+Bienvenido a la familia Cursos Online
+===============================================
+
+Estimado  <%= @registration.mother_name %> y <%= @registration.father_name %>,
+Ya estás pre-inscripto. No olvides pasar por el club [dirección] en el horario de 9 a 12 y de 14 a 18 dentro de las próximas 72 hs para confirmar la inscripción de #{@registration.alumno_name} 
+y abonar la inscripción.
+Te recordamos que también tendrás que presentar un certificado de buena salud emitido por un Medico.
+
+<% if Rails.env.development? %>
+  <%= @url_dev %>.
+  Titulo: <%= @registration %>
+  Mensaje: <%= @registration %>
+<% end %>
+

@@ -1,0 +1,17 @@
+<!--/Login -->
+<% unless user_signed_in? %>
+  <%= render partial: "devise/sessions/new"  %>
+<% end %>
+<!--/login -->
+
+<!--/Bienvenida -->
+<% if user_signed_in? %>
+  <%= render partial: "bienvenida"  %>
+<% end %>
+<!--/bienvenida -->
+
+<!--/Admin -->
+<% if user_signed_in?  %>
+  <%= render partial: "dashboard" if current_user.is_admin?  %>
+<% end %>
+<!--/Admin -->

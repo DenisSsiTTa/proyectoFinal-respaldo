@@ -1,0 +1,4 @@
+json.array!(@registrations) do |registration|
+  json.extract! registration, :id, :alumno_name, :alumno_age, :alumno_birtday, :alumno_dni, :alumno_address, :alumno_telephone, :alumno_email, :alumno_school_name, :alumno_grade, :alumno_school_address, :alumno_school_phone, :alumno_medical_insurance, :alumno_trauma, :alumno_surgery, :alumno_illness_asthma, :alumno_illness_allergy, :alumno_illness_heart_failure, :alumno_illness_diabetes, :alumno_illness_other, :alumno_medical_observation, :alumno_doctor, :alumno_know_swim, :alumno_swim_school, :alumno_swim_leave_reasons, :how_know_us, :parents_relation, :father_name, :father_age, :father_lives, :father_visit, :father_address, :father_profession, :father_work_phone, :mother_name, :mother_age, :mother_lives, :mother_visit, :mother_address, :mother_profession, :mother_work_phone, :who_register, :i_attest, :group_id
+  json.url registration_url(registration, format: :json)
+end

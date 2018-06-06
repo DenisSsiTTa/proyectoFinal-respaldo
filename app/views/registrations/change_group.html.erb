@@ -1,0 +1,62 @@
+<h1>DATOS DE INSCRIPCIÓN</h1>
+<p>
+  <strong>Apellido y Nombre:</strong>
+  <%= @registration.alumno_name %>
+</p>
+
+<p>
+  <strong>Edad:</strong>
+  <%= @registration.alumno_age %>
+</p>
+
+<p>
+  <strong> Fecha de Nacimiento:</strong>
+  <%= @registration.alumno_birtday %>
+</p>
+
+<p>
+  <strong> Genero:</strong>
+  <%= gender_to_text(@registration.alumno_gender) %>
+</p>
+
+<p>
+  <strong>Curso Actual:</strong>
+  <%= @registration.group.nombre if @registration.group %>
+</p>
+
+<h1>Selecciónar Curso</h1>
+<%= form_for(@registration) do |f| %> 
+  <% if @registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@registration.errors.count, "error") %> prohibe que esta Inscripción sea guardada:</h2>
+
+      <ul>
+      <% @registration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if user_signed_in?  %>
+  <div class="form-group">
+    <p>Opción de Administrador: puede mover de grupo al inscripto.
+    <% groups_array = grupos_temporada %>
+    <%= f.select(:group_id,  groups_array.map { |v| [v.nombre, v.id] }, {prompt: 'Seleccione un Curso', selected: @registration.group_id}, class: "form-control", id: "group_select" )  %>
+  </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <div class="actions">
+      <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
+
+
+<% if user_signed_in?  %>
+  <%= link_to 'Editar', edit_registration_path(@registration), class: "btn btn-default" if current_user.is_admin? %> |
+  <%= link_to 'Lista Inscriptos', registrations_path, class: "btn btn-default" if current_user.is_admin? %>
+<% end %>
+  <%= link_to 'Volver', :back, class: "btn btn-default"   %>

@@ -1,0 +1,10 @@
+<h1>Inscripción a "Cursos Online"</h1>
+<h3> Temporada <%= Time.now.year %></h3>
+
+<%= render 'form' %>
+
+  <% if user_signed_in?  %>
+   <%= link_to 'Volver', :back, class: "btn btn-default"  %>
+   <%= link_to ' Lista Almunos', registrations_path, class: "btn btn-default"  %> 
+   <%= link_to ' Lista grupos', groups_path, class: "btn btn-primary fa fa-group pull-right" if current_user.is_admin? %>
+  <% end %>

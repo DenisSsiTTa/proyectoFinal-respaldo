@@ -1,0 +1,1 @@
+json.extract! @registration, :id, :alumno_name, :alumno_age, :alumno_birtday, :alumno_dni, :alumno_address, :alumno_telephone, :alumno_email, :alumno_school_name, :alumno_grade, :alumno_medical_insurance, :alumno_medical_observation, :i_attest, :group_id, :created_at, :updated_at

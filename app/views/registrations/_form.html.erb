@@ -1,0 +1,101 @@
+<%= form_for(@registration) do |f| %> 
+  <% if @registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@registration.errors.count, "error") %> prohibe que esta Inscripción sea guardada:</h2>
+
+      <ul>
+      <% @registration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p> Para considerar la inscripción de su tutelado al curso es necesario que complete todas las opciones del formulario. Esto nos ayuda a analizar cada caso en particular.</p>
+  <h1> Datos Alumno </h1> 
+  <div class="form-group">
+    <%= f.label :alumno_name, "Nombre", class: 'control-label' %><br>
+    <%= f.text_field :alumno_name, placeholder: "Nombre de menor" , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alumno_age, "Edad", class: 'control-label' %><br>
+    <%= f.number_field :alumno_age, in: 2..15, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alumno_birtday, "Fecha de Nacimiento", class: 'control-label' %><br>
+    <% %>
+    <%= f.date_select :alumno_birtday, start_year: 2000, end_year:2013, prompt: true , class: 'form-control' %>
+  </div>
+   <div class="btn-group" data-toggle="buttons">
+    <p>Genero<br>    
+   <label class='<%= gender_active(@registration.alumno_gender, 1) %>'> Varon
+      <%= f.radio_button :alumno_gender, '1'%>  
+   </label>
+   <label class='<%= gender_active(@registration.alumno_gender, 2) %>'> Mujer
+      <%= f.radio_button :alumno_gender, '2'%>
+   </label>
+   </div>
+
+  <div class="form-group">
+    <%= f.label :alumno_dni, "DNI", class: 'control-label' %><br>
+    <%= f.number_field :alumno_dni, in: 44_000_000..99_000_000, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alumno_address, "Dirección", class: 'control-label' %><br>
+    <%= f.text_field :alumno_address, placeholder: "Dirección donde vive" , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alumno_telephone, "Teléfono", class: 'control-label' %><br>
+    <%= f.text_field :alumno_telephone, placeholder: "Teléfono de la casa" , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alumno_email, "Correo eléctronico", class: 'control-label' %><br>
+    <% #f.text_field :alumno_email, placeholder: "correo eléctornico" , class: 'form-control' %>
+    <%= f.email_field :alumno_email, class: 'form-control' %>
+  
+  </div>
+  <h2> Escuela del Alumno </h2>
+  <div class="form-group">
+    <%= f.label :alumno_school_name, "Escuela", class: 'control-label' %><br>
+    <%= f.text_field :alumno_school_name, placeholder: "Ingrese el nombre del establecimiento educativo al que asiste" , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alumno_grade, "Grado/Curso", class: 'control-label' %><br>
+    <%= f.number_field :alumno_grade, class: 'form-control' %>
+  </div>
+  <h2> Salud Alumno </h2> 
+  <div class="form-group">
+    <%= f.label :alumno_illness_other, "Enfermedades", class: 'control-label' %><br>
+    <%= f.text_field :alumno_illness_other, placeholder: "Indique enfermedades de las que debamos tener conocimiento por el tipo de actividades a realizar" , class: 'form-control' %>
+  </div>
+
+
+  <div class="panel panel-warning">
+    <div class="panel-body">
+      Doy fe que todos los datos proporcionados son correctos; autorizo a mi hijo/a a concurrir a los cursos y acepto la reglamentación ya conocida.
+      <br>
+       <a href="http://www.cursosonline.cl/reglamento-curso" class="navbar-btn btn-info btn pull-right" target="blank_">Ver reglamento</a>
+    </div>
+    <div class="panel-footer">
+      <%= f.check_box :i_attest, {}, true, false %><%= f.label :i_attest, " SI, doy fe.", class: 'control-label' %>
+    </div>
+  </div>
+
+  </div>
+  <% if user_signed_in?  %>
+    <p>Opción de Administrador: puede mover de grupo al inscripto.
+    <% groups_array = grupos_temporada %>
+    <%= f.select(:group_id,  groups_array.map { |v| [v.nombre, v.id] }, {prompt: 'Seleccione un Curso', selected: @registration.group_id}, class: "form-control", id: "group_select" )  %>
+  <% end %>
+ 
+
+  <div class="form-group">
+    <div class="actions">
+      <% if user_signed_in? %>
+        <%= f.submit ' Guardar', class: 'btn btn-primary btn-lg fa fa-floppy-o' if current_user.is_admin?%>
+      <% else %>
+        <%= render partial: "partials/recaptcha" if Rails.env.production? %>
+        <%= f.submit ' Inscribir', class: "btn btn-primary btn-lg fa fa-child" %>  
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<!-- # navigation styled for Bootstrap 3.0 -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Cambiar navegación</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>" title="Inscripciones Cursos Online">
+        <i class="fa fa-child"></i>
+        <span aria-hidden="true"> Inscripciones</span>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <%= render 'partials/navigation_links' %>
+      </ul>
+      <% if user_signed_in? %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to " #{current_user.email}", destroy_user_session_path, :method=>'delete', class: "navbar-link fa fa-user", title: "&nbsp; Cerrar sesión" %></a></li>
+      </ul>
+      <% end %>
+    </div>
+
+
+  </div>
+</nav>
+<!-- Navegación -->
+  <%= breadcrumbs  %>
+<!-- /Navegación -->

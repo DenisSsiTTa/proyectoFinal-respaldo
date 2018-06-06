@@ -1,0 +1,44 @@
+<%= form_for(@group) do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohíbe que este grupo sea guardado:</h2>
+
+      <ul>
+      <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :nombre, "Nombre del grupo", class: 'control-label' %><br>
+    <%= f.text_field :nombre, placeholder: "ingrese el nombre del grupo." , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sexo, "Sexo", class: 'control-label' %><br>
+    <% sex_array = {Varones: 1, Mujeres: 2, Mixto: 3} %>
+    <%= f.select(:sexo, sex_array, {prompt: 'Seleccione el Sexo', selected: @group.sexo}, class: "form-control", id: "sex_select" )  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :quota, "Cupo", class: 'control-label' %><br>
+    <%= f.number_field :quota, placeholder: "ingrese la cantidad de alumnos permitida ." , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :extended_quota, "Cupo extra", class: 'control-label' %><br>
+    <%= f.number_field :extended_quota, placeholder: "ingrese el cupo en espera ." , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :initial_age, "Edad mínima", class: 'control-label' %><br>
+    <%= f.number_field :initial_age, placeholder: "ingrese la edad mínima que debe tener el alumno." , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :maximun_age, "Edad máxima", class: 'control-label' %><br>
+    <%= f.number_field :maximun_age, placeholder: "ingrese la edad máxima que debe tener el alumno." , class: 'form-control' %>
+  </div>
+  <div class="form-group">
+   <div class="actions">
+    <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+   </div>
+  </div>
+<% end %>

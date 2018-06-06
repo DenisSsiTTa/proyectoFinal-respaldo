@@ -1,0 +1,34 @@
+<div>
+  <div>
+  <h1>Actividades Cursos Online</h1>
+	<h1>Lista de Alumnos</h1>
+	<h2>Curso: <%= @registrations.first.group.nombre if @registrations.first %></h2>
+  <h3> Temporada <%= Time.now.year %></h3>  
+ </div>
+
+<table id="registrations-list" class="table table-striped table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>Apellido y Nombre</th>
+      <th>Edad</th>
+      <th>F. de Nac.</th>
+      <th>Domicilio</th>
+      <th>Teléfono/s</th>
+      <th colspan="4">Ob.y/o Inf.</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registrations.each do |registration| %>
+      <tr>
+        <td><%= registration.alumno_name %></td>
+        <td><%= registration.alumno_age %></td>
+        <td><%= registration.alumno_birtday %></td>
+        <td><%= registration.alumno_address %></td>
+        <td><%= registration.alumno_telephone %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

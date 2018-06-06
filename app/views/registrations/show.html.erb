@@ -1,0 +1,76 @@
+<h3> Temporada <%= @registration.created_at.year %></h3>
+<h1>DATOS DE INSCRIPCIÓN</h1>
+<p>
+  <strong>Apellido y Nombre:</strong>
+  <%= @registration.alumno_name %>
+</p>
+
+<p>
+  <strong>Edad:</strong>
+  <%= @registration.alumno_age %>
+</p>
+
+<p>
+  <strong> Fecha de nacimiento:</strong>
+  <%= fecha_arg(@registration.alumno_birtday) %>
+</p>
+
+<p>
+  <strong> Genero:</strong>
+  <%= gender_to_text(@registration.alumno_gender) %>
+</p>
+
+<p>
+  <strong> DNI:</strong>
+  <%= @registration.alumno_dni %>
+</p>
+
+<p>
+  <strong> Domicilio:</strong>
+  <%= @registration.alumno_address %>
+</p>
+
+<p>
+  <strong> Teléfono:</strong>
+  <%= @registration.alumno_telephone %>
+</p>
+
+<p>
+  <strong> Dirección de eMail:</strong>
+  <%= @registration.alumno_email %>
+</p>
+<h2> Datos de la Escuela </h2>
+<p>
+  <strong> Colegio al que concurre:</strong>
+  <%= @registration.alumno_school_name %>
+</p>
+
+<p>
+  <strong> Grado/Año:</strong>
+  <%= ordinalizar_abreviado(@registration.alumno_grade) %>
+</p>
+
+<h2> Datos de Salud </h2>
+<p>
+  <strong> Observaciones médicas (Especificar):</strong>
+  <%= @registration.alumno_medical_observation %>
+</p>
+
+  <strong>Dio fe?:</strong>
+  <%= boolean_to_text(@registration.i_attest) %>
+</p>
+
+<p>
+  <strong>Posible grupo:</strong>
+  <%= @registration.group.nombre if @registration.group %>
+</p>
+
+<% if user_signed_in?  %>
+  <%= link_to 'Editar', edit_registration_path(@registration), class: "btn btn-default" if current_user.is_admin? %> |
+  <%= link_to 'Lista Inscriptos', registrations_path, class: "btn btn-default" if current_user.is_admin? %>
+<% end %>
+  <%= link_to 'Volver', :back, class: "btn btn-default"   %>
+
+  <br>
+<br>
+<% breadcrumb :registration, @registration %>

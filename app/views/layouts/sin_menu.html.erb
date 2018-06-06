@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Inscripciones Cursos Online" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Inscripciones Cursos Online" %>">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+    </header>
+    <main role="main">
+       <%= render 'partials/messages' %>
+       <%= yield %>
+       <!-- Navegación -->
+         <%= breadcrumbs pretext: "", separator: " &rsaquo; ", style: :bootstrap %>
+       <!-- /Navegación -->
+    </main>
+
+    <!-- Pie -->
+<hr>
+  <footer class="bottom">
+    <div class="container hidden-xs">
+     <ul class="nav navbar-nav pull-left">
+       <li><%= link_to ' Acerca de', pages_about_path, class: "fa fa-info-circle" %></li>
+     </ul>
+   </div>
+
+   <div class="container visible-xs">
+     <p class="navbar-text pull-left">Powered by Denisse - <time datetime="2018-05-01">2018</time></p>
+     <%= link_to ' Acerca de', pages_about_path, class: "fa fa-info-circle" %>
+   </div>
+ </footer>
+
+
+  </body>
+</html>

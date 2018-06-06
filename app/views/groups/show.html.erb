@@ -1,0 +1,38 @@
+<p>
+  <strong>Nombre del grupo:</strong>
+  <%= @group.nombre %>
+</p>
+
+<p>
+  <strong>Año:</strong> 
+  <%= @group.year %>
+</p>
+
+<p>
+  <strong>Sexo:</strong>
+  <%= sexo_grupo_a_texto(@group.sexo) %>
+</p>
+
+<p>
+  <strong>Cupo:</strong>
+  <%= @group.quota %>
+</p>
+
+<p>
+  <strong>Cupo extra:</strong>
+  <%= @group.extended_quota %>
+</p>
+
+<p>
+  <strong>Edad:</strong> desde 
+  <%= @group.initial_age %> años hasta <%= @group.maximun_age %> años.
+</p>
+
+
+<%= link_to 'Editar', edit_group_path(@group), class: "btn btn-default" if current_user.is_admin? %> |
+<%= link_to 'Volver', :back, class: "btn btn-default"   %>
+<%= link_to 'Lista grupos', groups_path, class: "btn btn-default"  %>
+
+<br>
+<br>
+<% breadcrumb :group, @group %>
